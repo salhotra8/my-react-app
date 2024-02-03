@@ -17,7 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import  Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.svg";
 import { ColorModeContext } from "../App";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -108,7 +108,7 @@ export default function MiniDrawer() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} color="inherit">
         <Toolbar>
           <IconButton
             color="inherit"
