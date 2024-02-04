@@ -1,6 +1,7 @@
 import { Container, Grid, Typography } from "@mui/material";
 import styles from "./gameGrid.module.scss";
 import useGames from "../../hooks/useGames";
+import GameCard from "../GameCard/GameCard";
 
 const GameGrid = () => {
   const { games, error } = useGames();
@@ -10,13 +11,14 @@ const GameGrid = () => {
       {error && <Typography>{error}</Typography>}
       <Grid
         container
-        rowSpacing={12}
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 5, sm: 8, md: 12 }}
+        rowSpacing={6}
+        spacing={{ xs: 2, md: 5 }}
+        columns={{ xs: 2, sm: 6, md: 12 }}
+        sx={{paddingLeft: 4, borderRadius:20}}
       >
         {games.map((game) => (
-          <Grid item xs={2} sm={4} md={4} key={game.id}>
-            <Typography>{game.name}</Typography>
+          <Grid item xs={3} sm={3} md={4} key={game.id}>
+            <GameCard game={game} />
           </Grid>
         ))}
       </Grid>

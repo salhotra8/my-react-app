@@ -5,6 +5,7 @@ import gameClientApi from "../services/game-client-api";
 export interface Games {
   id: number;
   name: string;
+  background_image: string
 }
 
 export interface GamesResponse {
