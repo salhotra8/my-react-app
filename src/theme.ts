@@ -8,6 +8,9 @@ const getDesignTokens = (mode: PaletteMode) => ({
       ? {
           // palette values for light mode
           primary: amber,
+          secondary: {
+            main: amber[700],
+          },
           background: {
             default: amber[100],
             paper: amber[200],
@@ -21,6 +24,9 @@ const getDesignTokens = (mode: PaletteMode) => ({
       : {
           // palette values for dark mode
           primary: grey,
+          secondary: {
+            main: grey[700],
+          },
           divider: grey[700],
           background: {
             default: grey[900],

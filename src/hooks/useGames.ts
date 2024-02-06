@@ -1,17 +1,7 @@
 import { AxiosResponse, AxiosError, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import gameClientApi from "../services/game-client-api";
-
-export interface Games {
-  id: number;
-  name: string;
-  background_image: string
-}
-
-export interface GamesResponse {
-  count: string;
-  results: Games[];
-}
+import { Games, GamesResponse } from "../interfaces/Games";
 
 const useGames = () => {
   const [games, setGames] = useState<Games[]>([]);
