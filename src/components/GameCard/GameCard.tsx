@@ -1,57 +1,77 @@
-import { Card, CardMedia, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+  Container,
+} from "@mui/material";
 import { Games } from "../../interfaces/Games";
 import PlatfromIcon from "../PlatformIcon/PlatformIcon";
-import {
-  FaWindows,
-  FaPlaystation,
-  FaXbox,
-  FaApple,
-  FaLinux,
-  FaAndroid,
-} from "react-icons/fa";
-import { MdPhoneIphone } from "react-icons/md";
-import { SiNintendo } from "react-icons/si";
-import { BsGlobe } from "react-icons/bs";
+import { amber, lightGreen } from "@mui/material/colors";
+import imageCropUrl from "../../utilities/imageCropUrl";
 
 interface GameProps {
   game: Games;
 }
 
 const GameCard = ({ game }: GameProps) => {
-  const platfromIconMap = {
-    pc: FaWindows,
-    playstation: FaPlaystation,
-    xbox: FaXbox,
-    nintendo: SiNintendo,
-    mac: FaApple,
-    ios: MdPhoneIphone,
-    web: BsGlobe,
-    android: FaAndroid,
-    linux: FaLinux,
-  };
+  function defineColor() {
+    return game.metacritic > 80
+      ? { bgColor: lightGreen[700], color: lightGreen[100] }
+      : { bgColor: amber[500], color: amber[100] };
+  }
+  const scoreColor = defineColor();
+
   return (
-    <Card sx={{ maxWidth: 300, borderRadius: 2 }}>
+    <Card sx={{ maxWidth: 400, borderRadius: 2 }}>
       <CardMedia
         component="img"
         alt={game.name}
-        height="200"
-        image={game.background_image}
+        height="220"
+        image={imageCropUrl(game.background_image)}
       />
       <CardContent
         sx={{
-          height: 100,
+          height: 130,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          px: 1,
+          gap: 1,
         }}
       >
-        <Typography gutterBottom variant="h6" fontWeight="600" component="div">
+        <Typography gutterBottom variant="h5" fontWeight="600">
           {game.name}
         </Typography>
-        <PlatfromIcon
-          platforms={game.parent_platforms.map((platform) => platform.platform)}
-        />
+        <Container
+          sx={{
+            display: "flex",
+            gap: 1,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <PlatfromIcon
+            platforms={game.parent_platforms.map(
+              (platform) => platform.platform
+            )}
+          />
+          <Box
+            sx={{
+              fontSize: 18,
+              fontWeight: 600,
+              borderRadius: 2,
+              px: 1,
+              color: scoreColor.color,
+              bgcolor: scoreColor.bgColor,
+            }}
+          >
+            {game.metacritic}
+          </Box>
+        </Container>
       </CardContent>
     </Card>
   );

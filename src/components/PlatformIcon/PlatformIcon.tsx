@@ -31,9 +31,9 @@ const PlatfromIcon = ({ platforms }: PlatformProps) => {
   };
   return (
     <>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={1} alignSelf="center">
         {platforms.map((platform) => (
-         <Icon key={platform.id} component={platformIconMap[platform.slug]} color="secondary"/>
+         <Icon key={platform.id} component={platformIconMap[platform.slug]} color="secondary" sx={{fontSize: 21}}/>
         ))}
       </Stack>
     </>
