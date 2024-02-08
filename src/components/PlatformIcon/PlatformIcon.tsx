@@ -1,4 +1,4 @@
-import { Icon, Stack} from "@mui/material";
+import { Icon, Stack } from "@mui/material";
 import { Platform } from "../../interfaces/Games";
 import {
   FaWindows,
@@ -18,7 +18,7 @@ interface PlatformProps {
 }
 
 const PlatfromIcon = ({ platforms }: PlatformProps) => {
-  const platformIconMap : {[key:string] : IconType} = {
+  const platformIconMap: { [key: string]: IconType } = {
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
@@ -33,7 +33,12 @@ const PlatfromIcon = ({ platforms }: PlatformProps) => {
     <>
       <Stack direction="row" spacing={1} alignSelf="center">
         {platforms.map((platform) => (
-         <Icon key={platform.id} component={platformIconMap[platform.slug]} color="secondary" sx={{fontSize: 21}}/>
+          <Icon
+            key={platform.id}
+            component={platformIconMap[platform.slug]}
+            color="secondary"
+            sx={{ fontSize: 21 }}
+          />
         ))}
       </Stack>
     </>

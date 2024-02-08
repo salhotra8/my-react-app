@@ -14,7 +14,7 @@ const GameGrid = () => {
         rowSpacing={6}
         spacing={{ xs: 2, md: 5 }}
         columns={{ xs: 2, sm: 6, md: 12 }}
-        sx={{ borderRadius:20}}
+        sx={{ borderRadius: 20 }}
       >
         {games.map((game) => (
           <Grid item xs={3} sm={3} md={4} key={game.id}>

@@ -1,11 +1,13 @@
 import * as React from "react";
-import {ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import getDesignTokens from "./theme";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid/GameGrid";
 import { CssBaseline } from "@mui/material";
 
-export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+});
 
 export default function ToggleColorMode() {
   const [mode, setMode] = React.useState<"light" | "dark">("light");
@@ -18,16 +20,12 @@ export default function ToggleColorMode() {
     []
   );
 
-  const theme = React.useMemo(
-    () =>
-      createTheme(getDesignTokens(mode)),
-    [mode]
-  );
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-      <CssBaseline />
+        <CssBaseline />
         <NavBar />
         <GameGrid />
       </ThemeProvider>
