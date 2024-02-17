@@ -1,5 +1,5 @@
 import { PaletteMode } from "@mui/material";
-import { amber, blue, grey } from "@mui/material/colors";
+import { amber, grey } from "@mui/material/colors";
 
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
@@ -15,10 +15,10 @@ const getDesignTokens = (mode: PaletteMode) => ({
             default: amber[100],
             paper: amber[200],
           },
-          divider: amber[200],
+          divider: amber[500],
           text: {
-            primary: blue[900],
-            secondary: blue[800],
+            primary: grey[800],
+            secondary: grey[900],
           },
         }
       : {

@@ -5,21 +5,23 @@
   padding-left: 4rem;
   text-align: center;
   height: 100%;
+
+  @media screen and (max-width: 426px) {
+    padding-left: 0px;
+  }
 }
 
 ::-webkit-scrollbar {
   width: 8px;
-
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #8f8d8d;
   background-clip: padding-box;
   border-radius: 20px;
-  &:hover{
+  &:hover {
     background-color: #767272;
   }
-
 }
 
 ::-webkit-scrollbar-track {

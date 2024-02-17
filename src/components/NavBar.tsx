@@ -16,7 +16,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import GenresList from "./GenresList/GenresList";
 
-const drawerWidth = 250;
+const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -25,7 +25,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
-  overflowY: "hidden"
+  overflowY: "hidden",
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -34,10 +34,10 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  overflowY:"hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  overflowY: "hidden",
+  width: "0px",
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(8)} + 11px)`,
   },
 });
 
@@ -119,7 +119,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <img src={Logo}></img>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" fontWeight={600}>
             Gamzeria
           </Typography>
           <IconButton
@@ -146,7 +146,7 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <GenresList />
+        <GenresList isDrawerOpen={open} />
       </Drawer>
     </Box>
   );

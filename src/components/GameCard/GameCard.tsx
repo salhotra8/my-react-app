@@ -10,6 +10,7 @@ import { Games } from "../../interfaces/Games";
 import PlatfromIcon from "../PlatformIcon/PlatformIcon";
 import { amber, lightGreen } from "@mui/material/colors";
 import imageCropUrl from "../../utilities/imageCropUrl";
+import noImage from "../../assets/noImage.png";
 
 interface GameProps {
   game: Games;
@@ -28,12 +29,14 @@ const GameCard = ({ game }: GameProps) => {
       <CardMedia
         component="img"
         alt={game.name}
-        height="220"
-        image={imageCropUrl(game.background_image)}
+        height="230"
+        image={imageCropUrl(game.background_image) || noImage}
+ 
       />
       <CardContent
         sx={{
-          height: 130,
+          minHeight: 145,
+          maxHeight: 180,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -59,18 +62,20 @@ const GameCard = ({ game }: GameProps) => {
               (platform) => platform.platform
             )}
           />
-          <Box
-            sx={{
-              fontSize: 18,
-              fontWeight: 600,
-              borderRadius: 2,
-              px: 1,
-              color: scoreColor.color,
-              bgcolor: scoreColor.bgColor,
-            }}
-          >
-            {game.metacritic}
-          </Box>
+          {game.metacritic !== null && (
+            <Box
+              sx={{
+                fontSize: 18,
+                fontWeight: 600,
+                borderRadius: 2,
+                px: 1,
+                color: scoreColor.color,
+                bgcolor: scoreColor.bgColor,
+              }}
+            >
+              {game.metacritic}
+            </Box>
+          )}
         </Container>
       </CardContent>
     </Card>

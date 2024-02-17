@@ -1,30 +1,49 @@
-import { AxiosResponse, AxiosError, CanceledError } from "axios";
+import {
+  AxiosResponse,
+  AxiosError,
+  CanceledError,
+  AxiosRequestConfig,
+} from "axios";
 import { useEffect, useState } from "react";
 import gameClientApi from "../services/game-client-api";
 
 interface FetchResponse<T> {
-    count: string,
-    result : T[]
+  count: string;
+  result: T[];
 }
 
-const useData = <T>(urlParams: string) => {
+const useData = <T>(
+  urlEndpoint: string,
+  requestConfig?: AxiosRequestConfig,
+  dependencyForUseEffect?: any[]
+) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const controller = new AbortController();
+  useEffect(
+    () => {
+      const controller = new AbortController();
+      setLoading(true);
+      gameClientApi
+        .get<FetchResponse<T>>(urlEndpoint, {
+          signal: controller.signal,
+          ...requestConfig,
+        })
+        .then((res: AxiosResponse) => setData(res.data.results))
+        .catch((error: AxiosError) => {
+          if (error instanceof CanceledError) return;
+          setError(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+      return () => controller.abort();
+    },
+    dependencyForUseEffect ? [...dependencyForUseEffect] : []
+  );
 
-    gameClientApi
-      .get<FetchResponse<T>>(urlParams, { signal: controller.signal })
-      .then((res: AxiosResponse) => setData(res.data.results))
-      .catch((error: AxiosError) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-      });
-    return () => controller.abort();
-  }, []);
-
-  return { data, error };
+  return { data, error, isLoading };
 };
 
 export default useData;

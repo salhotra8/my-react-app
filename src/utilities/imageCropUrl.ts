@@ -1,4 +1,6 @@
 const imageCropUrl = (imageUrl: string): string => {
+  if (!imageUrl) return "";
+  
   const searchWord = "media/";
   const index = imageUrl.indexOf(searchWord) + searchWord.length;
 

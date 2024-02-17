@@ -3,10 +3,31 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import getDesignTokens from "./theme";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid/GameGrid";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
+import { useState } from "react";
+import SortSelector, { SortOrder } from "./components/SortSelector/SortSelector";
+import PlatformSelector from "./components/PlatformSelector/PlatformSelector";
+import { Genres } from "./interfaces/Genres";
+import { Platform } from "./interfaces/Games";
 
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
+});
+
+export interface GameQuery {
+  genre?: Genres;
+  platform?: Platform;
+  sortOrder?: SortOrder;
+}
+
+interface GameQueryContext {
+  gameQuery: GameQuery;
+  setGameQuery: (gameQuery: GameQuery) => void;
+}
+
+export const GameQueryContext = React.createContext<GameQueryContext>({
+  gameQuery: {},
+  setGameQuery: () => {},
 });
 
 export default function ToggleColorMode() {
@@ -20,14 +41,30 @@ export default function ToggleColorMode() {
     []
   );
 
+  const [gameQuery, setGameQuery] = useState<GameQuery>({});
+
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NavBar />
-        <GameGrid />
+        <GameQueryContext.Provider value={{ gameQuery, setGameQuery }}>
+          <NavBar />
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              justifyContent: "start",
+              px: 4,
+              flexWrap: "wrap",
+            }}
+          >
+            <PlatformSelector />
+            <SortSelector />
+          </Box>
+          <GameGrid />
+        </GameQueryContext.Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
