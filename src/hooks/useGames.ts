@@ -14,12 +14,14 @@ const useGames = (props: Props) => {
         genres: props.gameQuery.genre?.id,
         platforms: props.gameQuery.platform?.id,
         ordering: props.gameQuery.sortOrder?.value,
+        search: props.gameQuery.searchText,
       },
     },
     [
       props.gameQuery.genre?.id,
       props.gameQuery.platform?.id,
       props.gameQuery.sortOrder?.value,
+      props.gameQuery.searchText,
     ]
   );
   return { games: data, error, isLoading };

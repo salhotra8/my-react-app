@@ -18,6 +18,7 @@ export interface GameQuery {
   genre?: Genres;
   platform?: Platform;
   sortOrder?: SortOrder;
+  searchText? : string;
 }
 
 interface GameQueryContext {

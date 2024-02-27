@@ -15,6 +15,8 @@ import { ColorModeContext } from "../App";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import GenresList from "./GenresList/GenresList";
+import SearchInput from "./SearchInput/SearchInput";
+import { useMediaQuery } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -94,6 +96,8 @@ export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
   const colorMode = React.useContext(ColorModeContext);
 
+  const matches = useMediaQuery("(min-width:700px)");
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -112,16 +116,23 @@ export default function MiniDrawer() {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 2,
+              marginRight: 1,
               ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
           </IconButton>
           <img src={Logo}></img>
-          <Typography variant="h6" noWrap component="div" fontWeight={600}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            fontWeight={600}
+            display={matches ? "block" : "none"}
+          >
             Gamzeria
           </Typography>
+          <SearchInput />
           <IconButton
             sx={{ ml: "auto" }}
             onClick={colorMode.toggleColorMode}
