@@ -1,5 +1,5 @@
 import { Container, Grid, Typography } from "@mui/material";
-import styles from "./gameGrid.module.scss";
+import styles from "./GameGrid.module.scss";
 import useGames from "../../hooks/useGames";
 import GameCard from "../GameCard/GameCard";
 import GameCardSkelaton from "../GameCardSkelaton/GameCardSkelaton";
