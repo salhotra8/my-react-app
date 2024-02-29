@@ -5,10 +5,13 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid/GameGrid";
 import { Box, CssBaseline } from "@mui/material";
 import { useState } from "react";
-import SortSelector, { SortOrder } from "./components/SortSelector/SortSelector";
+import SortSelector, {
+  SortOrder,
+} from "./components/SortSelector/SortSelector";
 import PlatformSelector from "./components/PlatformSelector/PlatformSelector";
 import { Genres } from "./interfaces/Genres";
 import { Platform } from "./interfaces/Games";
+import GameHeading from "./components/GameHeading/GameHeading";
 
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
@@ -18,7 +21,7 @@ export interface GameQuery {
   genre?: Genres;
   platform?: Platform;
   sortOrder?: SortOrder;
-  searchText? : string;
+  searchText?: string;
 }
 
 interface GameQueryContext {
@@ -52,13 +55,14 @@ export default function ToggleColorMode() {
         <CssBaseline />
         <GameQueryContext.Provider value={{ gameQuery, setGameQuery }}>
           <NavBar />
+          <GameHeading />
           <Box
             sx={{
               display: "flex",
               gap: 2,
               justifyContent: "start",
               px: 4,
-              flexWrap: "wrap",
+              flexWrap: "wrap", 
             }}
           >
             <PlatformSelector />

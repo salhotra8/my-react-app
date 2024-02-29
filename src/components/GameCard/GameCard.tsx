@@ -31,7 +31,6 @@ const GameCard = ({ game }: GameProps) => {
         alt={game.name}
         height="230"
         image={imageCropUrl(game.background_image) || noImage}
- 
       />
       <CardContent
         sx={{
@@ -40,18 +39,14 @@ const GameCard = ({ game }: GameProps) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-around",
           px: 1,
-          gap: 1,
+ 
         }}
       >
-        <Typography gutterBottom variant="h5" fontWeight="600">
-          {game.name}
-        </Typography>
         <Container
           sx={{
             display: "flex",
-            gap: 1,
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "space-between",
@@ -77,6 +72,9 @@ const GameCard = ({ game }: GameProps) => {
             </Box>
           )}
         </Container>
+        <Typography gutterBottom variant="h5" fontWeight="600">
+          {game.name}
+        </Typography>
       </CardContent>
     </Card>
   );
