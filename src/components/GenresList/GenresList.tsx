@@ -7,7 +7,7 @@ import { blueGrey } from "@mui/material/colors";
 import { Genres } from "../../interfaces/Genres";
 
 const GenresList = ({ isDrawerOpen }: { isDrawerOpen: boolean }) => {
-  const { genres, isLoading } = useGenres();
+  const { data, error, isLoading } = useGenres();
 
   const { gameQuery, setGameQuery } = useContext(GameQueryContext);
 
@@ -17,7 +17,7 @@ const GenresList = ({ isDrawerOpen }: { isDrawerOpen: boolean }) => {
 
   return (
     <Stack spacing={3} sx={{ overflowY: "scroll", overflowX: "hidden" }}>
-      {genres.map((genre) => {
+      {data?.results.map((genre) => {
         return isLoading ? (
           <GenresItemSkelaton key={genre.id} />
         ) : (

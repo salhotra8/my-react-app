@@ -1,9 +1,19 @@
+import { useQuery } from "react-query";
 import { Genres } from "../interfaces/Genres";
-import useData from "./useData";
+
+import gameClientApi from "../services/game-client-api";
+import { FetchResponse } from "./useData";
 
 const useGenres = () => {
-  const { data, error, isLoading } = useData<Genres>("/genres");
-  return { genres: data, error, isLoading };
+  const getGenres = useQuery({
+    queryKey: ["genres"],
+    queryFn: () =>
+      gameClientApi
+        .get<FetchResponse<Genres>>("/genres")
+        .then((res) => res.data),
+  });
+  console.log(getGenres);
+  return getGenres;
 };
 
 export default useGenres;

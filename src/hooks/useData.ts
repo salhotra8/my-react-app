@@ -7,9 +7,9 @@ import {
 import { useEffect, useState } from "react";
 import gameClientApi from "../services/game-client-api";
 
-interface FetchResponse<T> {
+export interface FetchResponse<T> {
   count: string;
-  result: T[];
+  results: T[];
 }
 
 const useData = <T>(
