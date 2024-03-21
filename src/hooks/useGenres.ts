@@ -1,8 +1,7 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Genres } from "../interfaces/Genres";
 
-import gameClientApi from "../services/game-client-api";
-import { FetchResponse } from "./useData";
+import gameClientApi, { FetchResponse } from "../services/game-client-api";
 
 const useGenres = () => {
   const getGenres = useQuery({
@@ -11,8 +10,8 @@ const useGenres = () => {
       gameClientApi
         .get<FetchResponse<Genres>>("/genres")
         .then((res) => res.data),
+        staleTime: 24 * 60 * 1000,
   });
-  console.log(getGenres);
   return getGenres;
 };
 
