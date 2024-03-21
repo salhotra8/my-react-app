@@ -5,12 +5,9 @@ import {
   AxiosRequestConfig,
 } from "axios";
 import { useEffect, useState } from "react";
-import gameClientApi from "../services/game-client-api";
+import gameClientApi, { FetchResponse } from "../services/game-client-api";
 
-interface FetchResponse<T> {
-  count: string;
-  result: T[];
-}
+
 
 const useData = <T>(
   urlEndpoint: string,

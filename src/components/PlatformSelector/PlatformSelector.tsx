@@ -15,7 +15,7 @@ const PlatformSelector = () => {
     setAnchorEl(null);
   };
 
-  const { platforms, error } = usePlatform();
+  const { data, error } = usePlatform();
 
   const { gameQuery, setGameQuery } = useContext(GameQueryContext);
 
@@ -48,7 +48,7 @@ const PlatformSelector = () => {
           },
         }}
       >
-        {platforms.map((platform) => (
+        {data?.results.map((platform) => (
           <MenuItem
             key={platform.id}
             onClick={() => onMenuItemClick(platform)}
