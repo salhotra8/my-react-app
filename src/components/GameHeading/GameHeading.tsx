@@ -1,12 +1,16 @@
 import { Typography } from "@mui/material";
-import { GameQueryContext } from "../../App";
-import { useContext } from "react";
+import useGenreLookup from "../../hooks/useGenreLookup";
+import usePlatformLookup from "../../hooks/usePlatformLookup";
+import useGameQuery from "../../hooks/useGameQuery";
 
 const GameHeading = () => {
-  const { gameQuery } = useContext(GameQueryContext);
+  const { gameQuery } = useGameQuery();
+
+  const genre = useGenreLookup(gameQuery.genreId);
+  const platform = usePlatformLookup(gameQuery.platformId);
   return (
     <Typography variant="h3" sx={{ mt: 3, textAlign: "start", ml: 4 }}>
-      {`${gameQuery.platform?.name || ""} ${gameQuery.genre?.name || ""} Games`}
+      {`${platform?.name || ""} ${genre?.name || ""} Games`}
     </Typography>
   );
 };

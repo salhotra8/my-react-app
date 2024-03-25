@@ -1,7 +1,7 @@
-import { Button, Menu, MenuItem } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useContext, useState } from "react";
-import { GameQueryContext } from "../../App";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { useState } from "react";
+import useGameQuery from "../../hooks/useGameQuery";
 export interface SortOrder {
   value: string;
   label: string;
@@ -16,7 +16,7 @@ const SortSelector = () => {
     setAnchorEl(null);
   };
 
-  const { gameQuery, setGameQuery } = useContext(GameQueryContext);
+  const { gameQuery, setGameQuery } = useGameQuery();
 
   function onMenuItemClick(sortOrder: SortOrder): void {
     setGameQuery({ ...gameQuery, sortOrder: sortOrder });
@@ -36,7 +36,7 @@ const SortSelector = () => {
     <>
       <Button
         variant="contained"
-        sx={{ mt: 2, borderRadius: 2.2, pr: .6 }}
+        sx={{ mt: 2, borderRadius: 2.2, pr: 0.6 }}
         onClick={handleClick}
       >
         {gameQuery.sortOrder
