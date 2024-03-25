@@ -1,12 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
-import styles from "./SearchInput.module.scss";
 import { Box, TextField } from "@mui/material";
-import { FormEvent, useContext, useRef } from "react";
-import { GameQueryContext } from "../../App";
+import { FormEvent, useRef } from "react";
+import useGameQuery from "../../hooks/useGameQuery";
+import styles from "./SearchInput.module.scss";
 
 const SearchInput = () => {
   const formRef = useRef<HTMLInputElement>(null);
-  const { gameQuery, setGameQuery } = useContext(GameQueryContext);
+  const { gameQuery, setGameQuery } = useGameQuery();
 
   return (
     <Box

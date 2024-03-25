@@ -1,8 +1,10 @@
-import { Button, Menu, MenuItem } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import usePlatform from "../../hooks/usePlatform";
-import { GameQueryContext } from "../../App";
-import { useContext, useState } from "react";
+import { Button, Menu, MenuItem } from "@mui/material";
+import usePlatform from "../../hooks/usePlatforms";
+
+import { useState } from "react";
+import useGameQuery from "../../hooks/useGameQuery";
+import usePlatformLookup from "../../hooks/usePlatformLookup";
 import { Platform } from "../../interfaces/Games";
 
 const PlatformSelector = () => {
@@ -17,10 +19,12 @@ const PlatformSelector = () => {
 
   const { data, error } = usePlatform();
 
-  const { gameQuery, setGameQuery } = useContext(GameQueryContext);
+  const { gameQuery, setGameQuery } = useGameQuery();
+
+  const platform = usePlatformLookup(gameQuery.platformId);
 
   function onMenuItemClick(platform: Platform): void {
-    setGameQuery({ ...gameQuery, platform: platform });
+    setGameQuery({ ...gameQuery, platformId: platform.id });
     handleClose();
   }
 
@@ -29,10 +33,10 @@ const PlatformSelector = () => {
     <>
       <Button
         variant="contained"
-        sx={{ mt: 2, borderRadius: 2.2, pr: .6 }}
+        sx={{ mt: 2, borderRadius: 2.2, pr: 0.6 }}
         onClick={handleClick}
       >
-        {gameQuery.platform?.name || "Platform"}
+        {platform?.name || "Platform"}
         <ArrowDropDownIcon sx={{ fontSize: 30 }} />
       </Button>
       <Menu
