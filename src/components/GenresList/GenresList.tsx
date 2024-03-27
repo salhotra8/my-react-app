@@ -1,18 +1,14 @@
 import { Box, Button, Stack, Typography, alpha } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
+import useGameQueryStore from "../../hooks/useGameStore";
 import useGenres from "../../hooks/useGenres";
-import { Genres } from "../../interfaces/Genres";
 import GenresItemSkelaton from "../GenresItemSkelaton/GenresItemSkelaton";
-import useGameQuery from "../../hooks/useGameQuery";
 
 const GenresList = ({ isDrawerOpen }: { isDrawerOpen: boolean }) => {
   const { data, isLoading } = useGenres();
 
-  const { gameQuery, setGameQuery } = useGameQuery();
-
-  function handleGenreClick(genre: Genres): void {
-    setGameQuery({ ...gameQuery, genreId: genre.id });
-  }
+  const genreId = useGameQueryStore(s => s.gameQuery.genreId);
+  const setGenreId = useGameQueryStore(s => s.setGenreId);
 
   return (
     <Stack spacing={1} sx={{ overflowY: "auto", overflowX: "hidden" }}>
@@ -33,11 +29,11 @@ const GenresList = ({ isDrawerOpen }: { isDrawerOpen: boolean }) => {
                   py: 1,
                   borderRadius: 3,
                   backgroundColor:
-                    genre.id === gameQuery.genreId
+                    genre.id === genreId
                       ? alpha(blueGrey[300], 0.3)
                       : "transparent",
                 }}
-                onClick={() => handleGenreClick(genre)}
+                onClick={() => setGenreId(genre.id)}
               >
                 <Box
                   component="img"

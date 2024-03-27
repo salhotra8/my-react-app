@@ -1,7 +1,7 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
-import useGameQuery from "../../hooks/useGameQuery";
+import useGameQueryStore from "../../hooks/useGameStore";
 export interface SortOrder {
   value: string;
   label: string;
@@ -16,10 +16,11 @@ const SortSelector = () => {
     setAnchorEl(null);
   };
 
-  const { gameQuery, setGameQuery } = useGameQuery();
+  const sortOrder = useGameQueryStore((s) => s.gameQuery.sortOrder);
+  const setSortOrder = useGameQueryStore((s) => s.setSortOrder);
 
   function onMenuItemClick(sortOrder: SortOrder): void {
-    setGameQuery({ ...gameQuery, sortOrder: sortOrder });
+    setSortOrder(sortOrder);
     handleClose();
   }
 
@@ -39,9 +40,7 @@ const SortSelector = () => {
         sx={{ mt: 2, borderRadius: 2.2, pr: 0.6 }}
         onClick={handleClick}
       >
-        {gameQuery.sortOrder
-          ? gameQuery.sortOrder.label
-          : "Order By: Relavance"}
+        {sortOrder ? sortOrder.label : "Order By: Relavance"}
         <ArrowDropDownIcon sx={{ fontSize: 30 }} />
       </Button>
       <Menu

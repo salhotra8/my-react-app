@@ -3,9 +3,8 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import usePlatform from "../../hooks/usePlatforms";
 
 import { useState } from "react";
-import useGameQuery from "../../hooks/useGameQuery";
+import useGameQueryStore from "../../hooks/useGameStore";
 import usePlatformLookup from "../../hooks/usePlatformLookup";
-import { Platform } from "../../interfaces/Games";
 
 const PlatformSelector = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -19,12 +18,13 @@ const PlatformSelector = () => {
 
   const { data, error } = usePlatform();
 
-  const { gameQuery, setGameQuery } = useGameQuery();
+  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
 
-  const platform = usePlatformLookup(gameQuery.platformId);
+  const platform = usePlatformLookup(platformId);
 
-  function onMenuItemClick(platform: Platform): void {
-    setGameQuery({ ...gameQuery, platformId: platform.id });
+  function onMenuItemClick(platformId: number | undefined): void {
+    setPlatformId(platformId);
     handleClose();
   }
 
@@ -52,10 +52,16 @@ const PlatformSelector = () => {
           },
         }}
       >
+        <MenuItem
+            onClick={() => onMenuItemClick(undefined)}
+            sx={{ px: 2, py: 1.1, fontSize: 16 }}
+          >
+            All Platforms
+          </MenuItem>
         {data?.results.map((platform) => (
           <MenuItem
             key={platform.id}
-            onClick={() => onMenuItemClick(platform)}
+            onClick={() => onMenuItemClick(platform.id)}
             sx={{ px: 2, py: 1.1, fontSize: 16 }}
           >
             {platform.name}

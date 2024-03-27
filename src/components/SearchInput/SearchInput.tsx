@@ -1,12 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, TextField } from "@mui/material";
 import { FormEvent, useRef } from "react";
-import useGameQuery from "../../hooks/useGameQuery";
+import useGameQueryStore from "../../hooks/useGameStore";
 import styles from "./SearchInput.module.scss";
 
 const SearchInput = () => {
   const formRef = useRef<HTMLInputElement>(null);
-  const { gameQuery, setGameQuery } = useGameQuery();
+  const setSearchText = useGameQueryStore((s) => s.setSearchText);
 
   return (
     <Box
@@ -22,7 +22,7 @@ const SearchInput = () => {
         onSubmit={(event: FormEvent) => {
           event.preventDefault();
           if (formRef.current) {
-            setGameQuery({ ...gameQuery, searchText: formRef.current.value });
+            setSearchText(formRef.current.value);
             formRef.current.value = "";
           }
         }}

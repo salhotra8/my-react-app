@@ -1,10 +1,10 @@
 import { Container, Grid, Typography } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
+import useGameQueryStore from "../../hooks/useGameStore";
 import useGames from "../../hooks/useGames";
 import GameCard from "../GameCard/GameCard";
 import GameCardSkelaton from "../GameCardSkelaton/GameCardSkelaton";
 import styles from "./GameGrid.module.scss";
-import useGameQuery from "../../hooks/useGameQuery";
 
 function gameCardSkelationArray() {
   return Array(10)
@@ -17,7 +17,7 @@ function gameCardSkelationArray() {
 }
 
 const GameGrid = () => {
-  const { gameQuery } = useGameQuery();
+  const { gameQuery } = useGameQueryStore();
 
   const { data, error, fetchNextPage, hasNextPage, isLoading } = useGames({
     gameQuery: gameQuery,

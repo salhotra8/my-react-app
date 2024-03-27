@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
+import useGameQueryStore from "../../hooks/useGameStore";
 import useGenreLookup from "../../hooks/useGenreLookup";
 import usePlatformLookup from "../../hooks/usePlatformLookup";
-import useGameQuery from "../../hooks/useGameQuery";
 
 const GameHeading = () => {
-  const { gameQuery } = useGameQuery();
+  const { gameQuery } = useGameQueryStore();
 
   const genre = useGenreLookup(gameQuery.genreId);
   const platform = usePlatformLookup(gameQuery.platformId);

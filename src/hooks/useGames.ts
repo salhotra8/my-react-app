@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Games } from "../interfaces/Games";
 import { APIGameClient, FetchResponse } from "../services/game-client-api";
-import { GameQuery } from "../components/helpers/GameQueryProvider";
+import { GameQuery } from "./useGameStore";
 
 interface Props {
   gameQuery: GameQuery;
@@ -20,6 +20,7 @@ const useGames = (props: Props) => {
           ordering: props.gameQuery.sortOrder?.value,
           search: props.gameQuery.searchText,
           page: pageParam,
+          page_size: 30
         },
       }),
     initialPageParam: 1,
